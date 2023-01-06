@@ -4,6 +4,9 @@ import coordinate.line.LineCoordinateCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -19,7 +22,8 @@ class LineCoordinateCalculatorTest {
     void calcTest() {
         CoordinateLocation firstLocation = new CoordinateLocation(10, 10);
         CoordinateLocation secondLocation = new CoordinateLocation(14, 15);
-        CoordinateCalculator lineCoordinate = new LineCoordinateCalculator(firstLocation, secondLocation);
+        List<CoordinateLocation> coordinateLocations = Arrays.asList(firstLocation, secondLocation);
+        CoordinateCalculator lineCoordinate = new LineCoordinateCalculator(coordinateLocations);
         assertEquals(6.403124, lineCoordinate.calc(), 0.001);
     }
 }

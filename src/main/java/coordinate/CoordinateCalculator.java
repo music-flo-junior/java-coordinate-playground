@@ -9,4 +9,5 @@ package coordinate;
 public interface CoordinateCalculator {
     double calc();
 
+    int size();
 }

@@ -2,9 +2,11 @@ package coordinate;
 
 import coordinate.exception.IsNotSquareLocationException;
 import coordinate.square.SquareCoordinateCalculator;
-import coordinate.square.SquareCoordinatePrinter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -24,8 +26,9 @@ class SquareCoordinateCalculatorTest {
         CoordinateLocation secondLocation = new CoordinateLocation(22, 10);
         CoordinateLocation thirdLocation = new CoordinateLocation(22, 18);
         CoordinateLocation fourthLocation = new CoordinateLocation(10, 19);
+        List<CoordinateLocation> coordinateLocations = Arrays.asList(firstLocation, secondLocation, thirdLocation, fourthLocation);
         assertThrows(IsNotSquareLocationException.class, () -> {
-            new SquareCoordinateCalculator(firstLocation, secondLocation, thirdLocation, fourthLocation);
+            new SquareCoordinateCalculator(coordinateLocations);
         });
     }
 
@@ -36,7 +39,8 @@ class SquareCoordinateCalculatorTest {
         CoordinateLocation secondLocation = new CoordinateLocation(22, 10);
         CoordinateLocation thirdLocation = new CoordinateLocation(22, 18);
         CoordinateLocation fourthLocation = new CoordinateLocation(10, 18);
-        SquareCoordinateCalculator calculator =new SquareCoordinateCalculator(firstLocation, secondLocation, thirdLocation, fourthLocation);
-        assertEquals(96,  calculator.calc());
+        List<CoordinateLocation> coordinateLocations = Arrays.asList(firstLocation, secondLocation, thirdLocation, fourthLocation);
+        SquareCoordinateCalculator calculator = new SquareCoordinateCalculator(coordinateLocations);
+        assertEquals(96, calculator.calc());
     }
 }

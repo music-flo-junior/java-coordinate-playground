@@ -1,5 +1,6 @@
 package coordinate.square;
 
+import coordinate.AbstractCoordinateCalculator;
 import coordinate.CoordinateCalculator;
 import coordinate.CoordinateLocation;
 import coordinate.exception.IsNotSquareLocationException;
@@ -13,26 +14,20 @@ import java.util.List;
  * @author 최현범(Jayce) / hb.choi@dreamus.io
  * @since 2023/01/01
  */
-public class SquareCoordinateCalculator implements CoordinateCalculator {
+public class SquareCoordinateCalculator extends AbstractCoordinateCalculator {
 
-    private final List<CoordinateLocation> locationList;
+    public static final int SQUARE_LOCATION_SIZE = 4;
     private final double firstX;
     private final double secondX;
     private final double firstY;
     private final double secondY;
 
-    public SquareCoordinateCalculator(CoordinateLocation firstLocation,
-                                      CoordinateLocation secondLocation,
-                                      CoordinateLocation thirdLocation,
-                                      CoordinateLocation fourthLocation) {
-
-        this.locationList = Arrays.asList(firstLocation, secondLocation, thirdLocation, fourthLocation);
-
-        this.firstX = locationList.stream().map(CoordinateLocation::getX).findFirst().orElseThrow(IsNotSquareLocationException::new);
-        this.secondX = locationList.stream().map(CoordinateLocation::getX).filter(x -> x != firstX).findFirst().orElseThrow(IsNotSquareLocationException::new);
-        this.firstY = locationList.stream().map(CoordinateLocation::getY).findFirst().orElseThrow(IsNotSquareLocationException::new);
-        this.secondY = locationList.stream().map(CoordinateLocation::getY).filter(y -> y != firstX).findFirst().orElseThrow(IsNotSquareLocationException::new);
-
+    public SquareCoordinateCalculator(List<CoordinateLocation> locations) {
+        super(locations);
+        this.firstX = locations.stream().map(CoordinateLocation::getX).findFirst().orElseThrow(IsNotSquareLocationException::new);
+        this.secondX = locations.stream().map(CoordinateLocation::getX).filter(x -> x != firstX).findFirst().orElseThrow(IsNotSquareLocationException::new);
+        this.firstY = locations.stream().map(CoordinateLocation::getY).findFirst().orElseThrow(IsNotSquareLocationException::new);
+        this.secondY = locations.stream().map(CoordinateLocation::getY).filter(y -> y != firstX).findFirst().orElseThrow(IsNotSquareLocationException::new);
         isValidLocation();
     }
 
@@ -41,16 +36,20 @@ public class SquareCoordinateCalculator implements CoordinateCalculator {
         return Math.abs(firstX - secondX) * Math.abs(firstY - secondY);
     }
 
+    @Override
+    public int size() {
+        return SQUARE_LOCATION_SIZE;
+    }
+
     public void isValidLocation() {
-        if (locationList.stream().filter(location -> location.getX() == firstX).count() != 2 ||
-                locationList.stream().filter(location -> location.getX() == secondX).count() != 2) {
+        if (locations.stream().filter(location -> location.getX() == firstX).count() != 2 ||
+                locations.stream().filter(location -> location.getX() == secondX).count() != 2) {
             throw new IsNotSquareLocationException();
         }
 
-        if (locationList.stream().filter(location -> location.getY() == firstY).count() != 2 ||
-                locationList.stream().filter(location -> location.getY() == secondY).count() != 2) {
+        if (locations.stream().filter(location -> location.getY() == firstY).count() != 2 ||
+                locations.stream().filter(location -> location.getY() == secondY).count() != 2) {
             throw new IsNotSquareLocationException();
         }
-
     }
 }
