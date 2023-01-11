@@ -1,5 +1,6 @@
-package coordinate.Figure;
+package coordinate.figure;
 
+import coordinate.model.type.FigureType;
 import coordinate.util.PointUtil;
 
 import java.util.List;
@@ -11,12 +12,12 @@ public class Triangle extends Figure {
     }
 
     @Override
-    String getName() {
-        return "삼각형";
+    public String getName() {
+        return FigureType.TRIANGLE.getName();
     }
 
     @Override
-    double getArea() {
+    public double getArea() {
         return this.area;
     }
 

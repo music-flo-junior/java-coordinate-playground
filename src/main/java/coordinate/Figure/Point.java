@@ -1,4 +1,4 @@
-package coordinate.Figure;
+package coordinate.figure;
 
 public class Point {
     private final double x;

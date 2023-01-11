@@ -1,4 +1,4 @@
-package coordinate.Figure;
+package coordinate.figure;
 
 import java.util.List;
 
@@ -12,12 +12,12 @@ public abstract class Figure {
     /**
      * 도형 이름
      */
-    abstract String getName();
+    public abstract String getName();
 
     /**
      * 면적
      */
-    abstract double getArea();
+    public abstract double getArea();
 
     /**
      * 면적 계산

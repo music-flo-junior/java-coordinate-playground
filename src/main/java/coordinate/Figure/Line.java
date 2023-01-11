@@ -1,5 +1,6 @@
-package coordinate.Figure;
+package coordinate.figure;
 
+import coordinate.model.type.FigureType;
 import coordinate.util.PointUtil;
 
 import java.util.List;
@@ -10,12 +11,12 @@ public class Line extends Figure {
     }
 
     @Override
-    String getName() {
-        return "선";
+    public String getName() {
+        return FigureType.LINE.getName();
     }
 
     @Override
-    double getArea() {
+    public double getArea() {
         return this.area;
     }
 

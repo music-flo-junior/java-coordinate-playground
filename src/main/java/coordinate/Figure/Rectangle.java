@@ -1,5 +1,6 @@
-package coordinate.Figure;
+package coordinate.figure;
 
+import coordinate.model.type.FigureType;
 import coordinate.util.PointUtil;
 
 import java.util.List;
@@ -13,12 +14,12 @@ public class Rectangle extends Figure {
     }
 
     @Override
-    String getName() {
-        return "사각형";
+    public String getName() {
+        return FigureType.RECTANGLE.getName();
     }
 
     @Override
-    double getArea() {
+    public double getArea() {
         return this.area;
     }
 

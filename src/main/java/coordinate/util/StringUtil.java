@@ -1,6 +1,6 @@
 package coordinate.util;
 
-import coordinate.Figure.Point;
+import coordinate.figure.Point;
 
 import java.util.ArrayList;
 import java.util.List;
