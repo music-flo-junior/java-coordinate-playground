@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 class CoordinateSystemTest {
     @Test
     @DisplayName("선의 길이가 정상적으로 나오는지 확인한다.")
@@ -23,6 +25,17 @@ class CoordinateSystemTest {
                 new Position(22, 18), new Position(10, 18)
         ));
         Assertions.assertThat(square.getResult()).isEqualTo("사각형 넓이는 96\n");
+    }
+
+    @Test
+    @DisplayName("직사각형이 아닌 경우")
+    void notRectangleTest() {
+        assertThatThrownBy(() -> {
+            new Square(Arrays.asList(
+                    new Position(10, 11), new Position(22, 10),
+                    new Position(22, 18), new Position(10, 18)
+            ));
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("직사각형만 가능합니다.");
     }
 
     @Test
@@ -73,5 +86,5 @@ class CoordinateSystemTest {
         Assertions.assertThat(positionList.get(0)).isEqualTo(new Position(10, 10));
         Assertions.assertThat(positionList.get(1)).isEqualTo(new Position(14, 15));
     }
-    
+
 }

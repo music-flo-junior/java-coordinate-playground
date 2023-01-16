@@ -1,6 +1,8 @@
 package coordinate;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Square implements Shape {
 
@@ -15,7 +17,9 @@ public class Square implements Shape {
         if (positionList == null || positionList.size() != 4) {
             throw new IllegalArgumentException("사각형은 좌표가 4개 필요합니다.");
         }
-        // TODO: 네 점이 뒤틀어진 사다리꼴이나 마름모는 제외하고 직사각형만 허용하도록 검사한다.
+        if (!isRectangle(positionList)) {
+            throw new IllegalArgumentException("직사각형만 가능합니다.");
+        }
     }
 
     @Override
@@ -48,4 +52,23 @@ public class Square implements Shape {
         return width * height;
     }
 
+    private boolean isRectangle(List<Position> positionList) {
+        Map<Integer, Integer> positionXCountMap = new HashMap<>();
+        Map<Integer, Integer> positionYCountMap = new HashMap<>();
+        for (Position position : positionList) {
+            positionXCountMap.put(position.getX(), positionXCountMap.getOrDefault(position.getX(), 0) + 1);
+            positionYCountMap.put(position.getY(), positionYCountMap.getOrDefault(position.getY(), 0) + 1);
+        }
+        for (Map.Entry<Integer, Integer> entry : positionXCountMap.entrySet()) {
+            if (entry.getValue() != 2) {
+                return false;
+            }
+        }
+        for (Map.Entry<Integer, Integer> entry : positionYCountMap.entrySet()) {
+            if (entry.getValue() != 2) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
